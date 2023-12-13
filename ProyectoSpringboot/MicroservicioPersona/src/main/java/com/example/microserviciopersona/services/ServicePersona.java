@@ -130,7 +130,7 @@ public class ServicePersona {
             try {
                 int cantDePaginasRevisadas = 0;
 
-                String url = "http://localhost:8082/reportesCapitulos/capitulosRevisadosByAnioPorPersona/" + anio + "/" + p;
+                String url = "http://localhost:8082/reportesCapitulos/capitulosRevisadosByAnioPorPersona/" + anio + "/" + p.getId();
 
                 // Define un ParameterizedTypeReference para indicar que esperamos una List<Integer>
                 ParameterizedTypeReference<List<Integer>> responseType = new ParameterizedTypeReference<>() {

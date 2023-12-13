@@ -2,9 +2,15 @@ package com.example.microservicioeditorial.controllers;
 
 import com.example.microservicioeditorial.dtos.DtoReporteLibro;
 import com.example.microservicioeditorial.entitys.ReporteLibro;
+import com.example.microservicioeditorial.security.Config.AuthResponse;
+import com.example.microservicioeditorial.security.Config.Login;
+import com.example.microservicioeditorial.security.Config.Register;
+import com.example.microservicioeditorial.services.ServiceAuth;
 import com.example.microservicioeditorial.services.ServiceReporteLibro;
+import jakarta.security.auth.message.config.AuthConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +24,9 @@ public class ControllerReporteLibro {
 
     @Autowired
     private ServiceReporteLibro serviceReporteLibro;
+
+    @Autowired
+    private  ServiceAuth serviceAuth;
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
@@ -104,4 +113,23 @@ public class ControllerReporteLibro {
             return ResponseEntity.badRequest().body(Collections.singletonList("Error al listar información de autores"));
         }
     }
+
+    //    @PostMapping("/login")
+//    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest){
+//        return ResponseEntity.ok(authService.login(loginRequest));
+//    }
+//    @PostMapping("/register")
+//    public ResponseEntity<AuthResponse> register(@RequestBody LoginRequest loginRequest){
+//        return ResponseEntity.ok(authService.register(loginRequest));
+//    }
+
+    @PostMapping(value = "login")
+    public ResponseEntity<AuthResponse> login(@RequestBody Login request){
+        return ResponseEntity.ok(serviceAuth.login(request));
+    }
+    @PostMapping(value = "register")
+    public ResponseEntity<AuthResponse> register(@RequestBody Register request){
+        return ResponseEntity.ok(serviceAuth.register(request));
+    }
+
 }

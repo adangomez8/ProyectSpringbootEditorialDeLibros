@@ -2,7 +2,10 @@ package com.example.microservicioeditorial.controllers;
 
 import com.example.microservicioeditorial.dtos.DtoReporteCapitulo;
 import com.example.microservicioeditorial.entitys.ReporteCapitulo;
+//import com.example.microservicioeditorial.security.Model.AuthResponse;
+//import com.example.microservicioeditorial.security.Model.LoginRequest;
 import com.example.microservicioeditorial.services.ServiceReporteCapitulo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reportesCapitulos")
+@RequiredArgsConstructor
 public class ControllerReporteCapitulo {
 
     @Autowired
     private ServiceReporteCapitulo serviceReporteCapitulo;
+
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
@@ -103,6 +108,7 @@ public class ControllerReporteCapitulo {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Reporte no encontrado");
         }
     }
+
 
 
 
